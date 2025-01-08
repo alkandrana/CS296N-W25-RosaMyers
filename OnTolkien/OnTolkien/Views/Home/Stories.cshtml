@@ -1,0 +1,50 @@
+﻿@using System.Globalization
+@model List<Story>
+@{
+	ViewData["Title"] = "Stories";
+}
+
+<div class="text-center">
+	<h1 class="display-4">Stories</h1>
+</div>
+
+
+
+<div>
+	<h2>The List of Reviews</h2>
+	<h4>Filter the list of reviews:</h4>
+	<form method="post" action="/Home/Filter" class="p-5">
+		<label name="name">Contributor</label>
+		<input name="name" type="text" class="bg-secondary"/>
+		<label name="date">Date</label>
+		<input name="date" class="bg-info"/>
+		<button type="submit" class="btn btn-success">Submit</button>
+		<a asp-action="Stories" asp-controller="Home" class="btn btn-info">Clear Filters</a>
+	</form>
+	@if (Model.Count != 0)
+	{
+		<div class="container">
+			<div class="row">
+				@foreach (Story s in Model)
+				{
+					<p class="col-3 divider">
+						Title: @s.Title <br/>
+						Subject: @s.Topic <br/>
+						Contributor: @s.Contributor.UserName <br/>
+						Year of the Event: @s.StoryYear <br/>
+						The Story: @s.StoryText <br/>
+						Submission Date: @s.EntryDate.ToString("d", new CultureInfo("en-us"))
+					</p>
+				}
+			</div>
+		</div>
+	}
+	else
+	{
+		<p>Be the first to contribute a story!</p>
+	}
+	<a asp-action="Story" asp-controller="Home" class="btn btn-primary">Story Forum</a>
+</div>
+<script>
+	
+</script>

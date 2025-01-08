@@ -1,0 +1,37 @@
+@model Quiz
+
+@{
+    ViewData["Title"] = "Quiz Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Trivia Quiz</h1>
+</div>
+
+<form method="post" class="container">
+    
+        @foreach (Question question in Model.Questions)
+        {
+            <div class="row p-2">
+                <p class="col-lg-6">
+                    @question.Q
+                </p>
+                <input class="col-lg-2 bg-warning-subtle" name="answer" value="@question.UserAnswer"/>
+                <button class="col-lg-1 btn btn-outline-warning ms-2" type="submit">Submit</button>
+                @if (question.UserAnswer != null)
+                {
+                    @if (question.IsRight)
+                    {
+                        <span class="col-lg-1">Right</span>
+                    }
+                    else
+                    {
+                        <span class="col-lg-1">Wrong</span>
+                    }
+                }
+            </div>
+        }
+        
+    
+</form>
+    

@@ -1,0 +1,54 @@
+﻿@model Story
+@{
+    ViewData["Title"] = "Story Forum";
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Story Forum</h1>
+</div>
+
+<span>@ViewBag.ErrorMessage</span>
+
+<form method="post" class="container">
+    <div class="row p-2">
+        <label for="name" class="col-form-label col-md-2 mb-3">Your Name</label>
+        <div class="col-md-8">
+            <input id="name" name="Contributor.UserName" class="form-control bg-dark-subtle" />
+        </div>
+    </div>
+   
+    <div class="row p-2">
+        <label for="title" class="col-form-label col-md-2 mb-3">Title</label>
+        <div class="col-md-8">
+            <input id="title" name="Title" class="form-control bg-secondary-subtle" />
+        </div>
+    </div>
+
+    <div class="row p-2">
+        <label for="topic" class="col-form-label col-md-2 mb-3">Topic</label>
+        <div class="col-md-8">
+            <input id="topic" name="Topic" class="form-control bg-dark-subtle" />
+        </div>
+    </div>
+
+    <div class="row p-2">
+        <label for="year" class="col-form-label col-md-2 mb-3">Year of the Event</label>
+        <div class="col-md-8">
+            <input id="year" name="StoryYear" class="form-control bg-secondary-subtle" />
+        </div>
+    </div>
+
+    <div class="row p-2">
+        <label for="story" class="col-form-label col-md-2 mb-3">Enter your story here</label>
+        <div class="col-md-8">
+            <textarea id="story" name="StoryText" class="form-control bg-info-subtle"></textarea>
+        </div>
+    </div>
+
+    <div class="row p-2">
+        <div class="col-md-2 offset-md-8">
+            <button type="submit" class="form-control btn btn-outline-warning">Submit</button>
+        </div>
+    </div>
+</form>

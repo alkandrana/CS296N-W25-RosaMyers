@@ -413,3 +413,5 @@ FodyWeavers.xsd
 /dataSources/
 /dataSources.local.xml
 
+# Mac-specific files
+*.DotSettings*
