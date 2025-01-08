@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using OnTolkien.Data;
 using System.Data.Common;
+using Microsoft.AspNetCore.Identity;
+using OnTolkien.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,12 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+// Add dependency injection
 builder.Services.AddTransient<IStoryRepository, StoryRepository>();
+
+// Add Identity services
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 var app = builder.Build();
 
@@ -29,6 +36,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",

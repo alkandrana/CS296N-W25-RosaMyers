@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace OnTolkien.Models
 {
-    public class AppUser
+    public class AppUser : IdentityUser
     {
-        public int AppUserId { get; set; }
-        
-        public string UserName { get; set; }
-
         public DateTime SignUpDate { get; set; }
     }
 }
