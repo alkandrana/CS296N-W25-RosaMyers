@@ -10,22 +10,15 @@ public class SeedData
         {
             var userManager = provider.GetRequiredService<UserManager<AppUser>>();
             // user1
-            const string SECRET_PASSWORD1 = "alk0nd1r";
             AppUser contributor1 = new AppUser { UserName = "Rachel McKenzie" };
-            var result1 = userManager.CreateAsync(contributor1, SECRET_PASSWORD1);
             // user2
-            const string SECRET_PASSWORD2 = "D1nlask1th";
             AppUser contributor2 = new AppUser { UserName = "Elithan" };
-            var result2 = userManager.CreateAsync(contributor2, SECRET_PASSWORD2);
             // user3
-            const string SECRET_PASSWORD3 = "Sn0wd0n";
             AppUser contributor3 = new AppUser { UserName = "James McKenzie" };
-            var result3 = userManager.CreateAsync(contributor3, SECRET_PASSWORD3);
-            
-            ctx.Users.Add(contributor1);
-            ctx.Users.Add(contributor2);
-            ctx.Users.Add(contributor3);
-            ctx.SaveChanges();
+            const string SECRET_PASSWORD = "alk0nd1r";
+            userManager.CreateAsync(contributor1, SECRET_PASSWORD);
+            userManager.CreateAsync(contributor2, SECRET_PASSWORD);
+            userManager.CreateAsync(contributor3, SECRET_PASSWORD);
 
             Story story1 = new Story
             {
