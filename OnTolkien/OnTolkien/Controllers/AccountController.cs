@@ -18,15 +18,15 @@ public class AccountController : Controller
 
     public IActionResult Register()
     {
-        return View();
+        return View("Registration");
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register(RegisterViewModel model)
+    public async Task<IActionResult> Register(RegisterVM model)
     {
         if (ModelState.IsValid)
         {
-            var user = new AppUser { UserName = model.Username };
+            var user = new AppUser { UserName = model.Username, SignUpDate = DateTime.Now};
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
@@ -41,7 +41,7 @@ public class AccountController : Controller
                 }
             }
         }
-        return View(model);
+        return View("Registration", model);
     }
 
     public IActionResult Login(string returnUrl = "")
