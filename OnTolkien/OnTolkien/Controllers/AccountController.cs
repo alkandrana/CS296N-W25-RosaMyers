@@ -7,12 +7,10 @@ public class AccountController : Controller
 {
     
     private UserManager<AppUser> _userManager;
-    private SignInManager<AppUser> _signInManager;
 
-    public AccountController(UserManager<AppUser> userMngr, SignInManager<AppUser> signInMngr)
+    public AccountController(UserManager<AppUser> userMngr)
     {
         _userManager = userMngr;
-        _signInManager = signInMngr;
     }
     // GET
     public IActionResult Register()
@@ -29,7 +27,6 @@ public class AccountController : Controller
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
             }
             else
