@@ -46,12 +46,12 @@ public class AccountController : Controller
 
     public IActionResult Login(string returnUrl = "")
     {
-        var model = new LoginViewModel {ReturnUrl = returnUrl};
+        var model = new LoginVM {ReturnUrl = returnUrl};
         return View(model);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(LoginViewModel model)
+    public async Task<IActionResult> Login(LoginVM model)
     {
         var result = await _signInManager.PasswordSignInAsync(
             model.Username, model.Password, isPersistent: model.RememberMe, 
@@ -72,7 +72,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> LogOut()
+    public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");

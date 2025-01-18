@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnTolkien.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnTolkien.Data;
 
@@ -10,10 +11,12 @@ namespace OnTolkien.Controllers
     {
 
         private IStoryRepository _repo;
+        private UserManager<AppUser> _userManager;
 
-        public HomeController(IStoryRepository r)
+        public HomeController(IStoryRepository r, UserManager<AppUser> userMngr)
         {
             _repo = r;
+            _userManager = userMngr;
         }
 
         public IActionResult Index()
@@ -55,6 +58,8 @@ namespace OnTolkien.Controllers
         [HttpPost]
         public IActionResult Story(Story model)
         {
+            model.Contributor = _userManager.GetUserAsync(User).Result;
+            model.Contributor.UserName = model.Contributor.UserName;
             model.EntryDate = DateTime.Now;
             if (_repo.StoreStory(model) > 0)
             {

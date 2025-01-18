@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnTolkien.Models;
 
-public class LoginViewModel
+public class LoginVM
 {
     [Required(ErrorMessage = "Please enter your username.")]
     [StringLength(255)]
