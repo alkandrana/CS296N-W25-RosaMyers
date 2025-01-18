@@ -1,20 +1,24 @@
 using OnTolkien.Models;
+using Microsoft.AspNetCore.Identity;
 namespace OnTolkien.Data;
 
 public class SeedData
 {
-    public static void Seed(AppDbContext ctx)
+    public static void Seed(AppDbContext ctx, IServiceProvider provider)
     {
         if (!ctx.Stories.Any())
         {
-            AppUser contributor1 = new AppUser { UserName = "Rachel McKenzie" };
+            var userManager = provider.GetRequiredService<UserManager<AppUser>>();
+            // user1
+            AppUser contributor1 = new AppUser { UserName = "Rachel" };
+            // user2
             AppUser contributor2 = new AppUser { UserName = "Elithan" };
-            AppUser contributor3 = new AppUser { UserName = "James McKenzie" };
-            
-            ctx.Users.Add(contributor1);
-            ctx.Users.Add(contributor2);
-            ctx.Users.Add(contributor3);
-            ctx.SaveChanges();
+            // user3
+            AppUser contributor3 = new AppUser { UserName = "James" };
+            const string SECRET_PASSWORD = "Secret!123";
+            userManager.CreateAsync(contributor1, SECRET_PASSWORD);
+            userManager.CreateAsync(contributor2, SECRET_PASSWORD);
+            userManager.CreateAsync(contributor3, SECRET_PASSWORD);
 
             Story story1 = new Story
             {
