@@ -17,7 +17,7 @@ public class AccountController : Controller
     // GET
     public IActionResult Register()
     {
-        return View();
+        return View("Registration");
     }
     
     [HttpPost]
@@ -40,6 +40,6 @@ public class AccountController : Controller
                 }
             }
         }
-        return View(model);
+        return View("Registration", model);
     }
 }
