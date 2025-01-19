@@ -44,6 +44,7 @@
                     }
                     else
                     {
+                        var action = ViewContext.RouteData.Values["action"]?.ToString();
                         <li class="nav-item">
                             <a class="nav-link" asp-action="Register" asp-controller="Account">
                                 Register
