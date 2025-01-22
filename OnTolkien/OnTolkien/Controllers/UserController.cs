@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnTolkien.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnTolkien.Controllers;
-
+[Authorize(Roles = "Admin")]
 public class UserController : Controller
 {
     private UserManager<AppUser> _userManager;
@@ -43,7 +44,7 @@ public class UserController : Controller
 
     public IActionResult Add()
     {
-        return View();
+        return View("../Account/Registration");
     }
     
     [HttpPost]
@@ -65,7 +66,7 @@ public class UserController : Controller
                 }
             }
         }
-        return View(model);
+        return View("../Account/Registration", model);
     }
 
     [HttpPost]
