@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnTolkien.Models;
@@ -15,7 +16,8 @@ public class AccountController : Controller
         _userManager = userMngr;
         _signInManager = signInMngr;
     }
-
+    
+    // GET
     public IActionResult Register()
     {
         return View("Registration");
