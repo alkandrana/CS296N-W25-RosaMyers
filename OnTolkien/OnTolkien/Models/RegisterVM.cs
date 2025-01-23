@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+
 namespace OnTolkien.Models;
 
 public class RegisterVM

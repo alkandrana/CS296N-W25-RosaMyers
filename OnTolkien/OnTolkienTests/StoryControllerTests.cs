@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnTolkien.Controllers;
 using OnTolkien.Data;
@@ -15,7 +16,7 @@ public class StoryControllerTests
     public StoryControllerTests(ITestOutputHelper output)
     {
         _output = output;
-        _controller = new HomeController(_repo);
+        _controller = new HomeController(_repo, null);
     }
 
     [Fact]
@@ -34,7 +35,7 @@ public class StoryControllerTests
     }
 
     [Fact]
-    public void Review_PostTest_Failure()
+    public void Story_PostTest_Failure()
     {
         // arrange
         // Done in the constructor

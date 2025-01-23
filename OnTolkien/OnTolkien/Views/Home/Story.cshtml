@@ -8,16 +8,9 @@
     <h1 class="display-4">Story Forum</h1>
 </div>
 
-<span>@ViewBag.ErrorMessage</span>
+<span class="text-danger">@ViewBag.ErrorMessage</span>
 
 <form method="post" class="container">
-    <div class="row p-2">
-        <label for="name" class="col-form-label col-md-2 mb-3">Your Name</label>
-        <div class="col-md-8">
-            <input id="name" name="Contributor.UserName" class="form-control bg-dark-subtle" />
-        </div>
-    </div>
-   
     <div class="row p-2">
         <label for="title" class="col-form-label col-md-2 mb-3">Title</label>
         <div class="col-md-8">

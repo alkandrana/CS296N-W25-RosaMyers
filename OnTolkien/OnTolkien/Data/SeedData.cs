@@ -10,11 +10,11 @@ public class SeedData
         {
             var userManager = provider.GetRequiredService<UserManager<AppUser>>();
             // user1
-            AppUser contributor1 = new AppUser { UserName = "Rachel" };
+            AppUser contributor1 = new AppUser { UserName = "Rachel McKenzie" };
             // user2
             AppUser contributor2 = new AppUser { UserName = "Elithan" };
             // user3
-            AppUser contributor3 = new AppUser { UserName = "James" };
+            AppUser contributor3 = new AppUser { UserName = "James McKenzie" };
             const string SECRET_PASSWORD = "Secret!123";
             userManager.CreateAsync(contributor1, SECRET_PASSWORD);
             userManager.CreateAsync(contributor2, SECRET_PASSWORD);
