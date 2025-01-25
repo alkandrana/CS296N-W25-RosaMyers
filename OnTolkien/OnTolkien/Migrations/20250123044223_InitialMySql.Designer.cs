@@ -11,8 +11,8 @@ using OnTolkien.Data;
 namespace OnTolkien.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250108222442_Identity")]
-    partial class Identity
+    [Migration("20250123044223_InitialMySql")]
+    partial class InitialMySql
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

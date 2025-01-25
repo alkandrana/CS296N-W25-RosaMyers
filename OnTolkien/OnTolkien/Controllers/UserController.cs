@@ -33,18 +33,9 @@ public class UserController : Controller
         return View(model);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateAdminRole()
-    {
-        var result = await _roleManager.CreateAsync(new IdentityRole("Admin"));
-        // TODO: RESOLVE STUB
-        if (result.Succeeded) { }
-        return RedirectToAction("Index");
-    }
-
     public IActionResult Add()
     {
-        return View("../Account/Registration");
+        return View();
     }
     
     [HttpPost]
@@ -66,7 +57,7 @@ public class UserController : Controller
                 }
             }
         }
-        return View("../Account/Registration", model);
+        return View(model);
     }
 
     [HttpPost]
@@ -113,6 +104,15 @@ public class UserController : Controller
         var result = await _userManager.RemoveFromRoleAsync(user, "Admin");
         // TODO: resolve stub
         if (result.Succeeded) {}
+        return RedirectToAction("Index");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> CreateAdminRole()
+    {
+        var result = await _roleManager.CreateAsync(new IdentityRole("Admin"));
+        // TODO: RESOLVE STUB
+        if (result.Succeeded) { }
         return RedirectToAction("Index");
     }
 
