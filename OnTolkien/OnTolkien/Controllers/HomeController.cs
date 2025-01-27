@@ -34,19 +34,19 @@ namespace OnTolkien.Controllers
             return View();
         }
 
-        public IActionResult Stories()
+        public async Task<IActionResult> Stories()
         {
-             var stories = _repo.GetAllStories();
+             var stories = await _repo.GetAllStoriesAsync();
              return View(stories);
         }
 
-        public IActionResult Filter(string name, string date)   // note to self: name attribute on the 
+        public async Task<IActionResult> Filter(string name, string date)   // note to self: name attribute on the 
         {                                                       // form has to match the parameter passed 
-            var stories = _repo.GetAllStories(); // into the action method
+            var stories = await _repo.GetAllStoriesAsync(); // into the action method
             stories = stories.Where(s => name == null || s.Contributor.UserName.Contains(name))
                 .Where(s => date == null || s.EntryDate.ToShortDateString() 
                     == DateTime.Parse(date).ToShortDateString())
-                .ToList();
+                .ToList<Story>();
             return View("Stories", stories);
         }
         [Authorize]
@@ -57,14 +57,14 @@ namespace OnTolkien.Controllers
         
         [HttpPost]
         [Authorize]
-        public IActionResult Story(Story model)
+        public async Task<IActionResult> Story(Story model)
         {
             if (model.Contributor == null)  // otherwise, unit tests will fail
             {
-                model.Contributor = _userManager?.GetUserAsync(User).Result;
+                model.Contributor =  _userManager?.GetUserAsync(User).Result;
             }
             model.EntryDate = DateTime.Now;
-            if (_repo.StoreStory(model) > 0)
+            if (await _repo.StoreStoryAsync(model) > 0)
             {
                 return RedirectToAction("Stories", new { storyId = model.StoryId });
             }

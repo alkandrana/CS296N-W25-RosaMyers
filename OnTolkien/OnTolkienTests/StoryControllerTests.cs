@@ -27,7 +27,7 @@ public class StoryControllerTests
 
         // act
         _story.Contributor = new AppUser();
-        var result = _controller.Story(_story);
+        var result = _controller.Story(_story).Result;
 
         // assert
         // Check to see if I got a RedirectToActionResult
@@ -41,10 +41,11 @@ public class StoryControllerTests
         // Done in the constructor
 
         // act
-        var result = _controller.Story(_story);
+        var result = _controller.Story(_story).Result;
 
         // assert
         // Check to see if I got a RedirectToActionResult
         Assert.True(result.GetType() == typeof(ViewResult));
+        _output.WriteLine(result.GetType().ToString());
     }
 }
