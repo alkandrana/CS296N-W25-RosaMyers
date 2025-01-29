@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnTolkien.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnTolkien.Data;
@@ -48,13 +49,14 @@ namespace OnTolkien.Controllers
                 .ToList();
             return View("Stories", stories);
         }
-
+        [Authorize]
         public IActionResult Story() 
         {
             return View();
         }
-
+        
         [HttpPost]
+        [Authorize]
         public IActionResult Story(Story model)
         {
             if (model.Contributor == null)  // otherwise, unit tests will fail

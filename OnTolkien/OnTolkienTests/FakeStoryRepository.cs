@@ -12,7 +12,7 @@ public class FakeStoryRepository : IStoryRepository
         return story;
     }
     
-    public int StoreStory(Story model)
+    public int StoreStory(Story? model)
     {
         int status = 0;
         if (model != null && model.Contributor != null)

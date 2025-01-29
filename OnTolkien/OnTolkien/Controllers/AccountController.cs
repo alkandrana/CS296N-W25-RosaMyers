@@ -46,14 +46,14 @@ public class AccountController : Controller
         return View("Registration", model);
     }
 
-    public IActionResult Login(string returnUrl = "")
+    public IActionResult LogIn(string returnUrl = "")
     {
         var model = new LoginVM {ReturnUrl = returnUrl};
         return View(model);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(LoginVM model)
+    public async Task<IActionResult> LogIn(LoginVM model)
     {
         var result = await _signInManager.PasswordSignInAsync(
             model.Username, model.Password, isPersistent: model.RememberMe, 
@@ -78,5 +78,10 @@ public class AccountController : Controller
     {
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
+    }
+
+    public ViewResult AccessDenied()
+    {
+        return View();
     }
 }
