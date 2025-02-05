@@ -103,7 +103,10 @@ public class UserController : Controller
         AppUser user = await _userManager.FindByIdAsync(id);
         var result = await _userManager.RemoveFromRoleAsync(user, "Admin");
         // TODO: resolve stub
-        if (result.Succeeded) {}
+        if (result.Succeeded)
+        {
+            ViewBag.Message = user.UserName + " has been successfully removed from the admin role.";
+        }
         return RedirectToAction("Index");
     }
     
@@ -112,7 +115,10 @@ public class UserController : Controller
     {
         var result = await _roleManager.CreateAsync(new IdentityRole("Admin"));
         // TODO: RESOLVE STUB
-        if (result.Succeeded) { }
+        if (result.Succeeded)
+        {
+            ViewBag.Message = "Admin role has been successfully created.";
+        }
         return RedirectToAction("Index");
     }
 
@@ -122,7 +128,10 @@ public class UserController : Controller
         IdentityRole role = await _roleManager.FindByIdAsync(id);
         var result = await _roleManager.DeleteAsync(role);
         // TODO: resolve stub
-        if (result.Succeeded) {}
+        if (result.Succeeded)
+        {
+            ViewBag.Message = role.Name + " role has been successfully deleted.";
+        }
         return RedirectToAction("Index");
     }
     

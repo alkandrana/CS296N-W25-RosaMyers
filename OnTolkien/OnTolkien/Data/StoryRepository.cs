@@ -11,26 +11,26 @@ public class StoryRepository : IStoryRepository
         _context = ctx;
     }
 
-    public List<Story> GetAllStories()
+    public async Task<List<Story>> GetAllStoriesAsync()
     {
-        var stories = _context.Stories.Include(story => story.Contributor).ToList();
+        var stories = _context.Stories.Include(story => story.Contributor).ToListAsync();
 
-        return stories;
+        return await stories;
     }
 
-    public Story? GetStoryById(int id)
+    public async Task<Story?>? GetStoryByIdAsync(int id)
     {
-        var story = _context.Stories 
+        var story = await _context.Stories 
             .Include(story => story.Contributor)
-            .SingleOrDefault(story => story.StoryId == id);
+            .SingleOrDefaultAsync(story => story.StoryId == id);
         return story;
     }
    
-    public int StoreStory(Story model)
+    public async Task<int> StoreStoryAsync(Story model)
     {
         model.EntryDate = DateTime.Now;
-        _context.Stories.Add(model);
-        return _context.SaveChanges();
+        await _context.Stories.AddAsync(model);
+        return await _context.SaveChangesAsync();
     }
     
     

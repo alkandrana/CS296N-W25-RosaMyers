@@ -3,7 +3,7 @@ namespace OnTolkien.Data;
 
 public interface IStoryRepository
 {
-    public List<Story> GetAllStories(); 
-    public Story? GetStoryById(int id);
-    public int StoreStory(Story model);
+    public Task<List<Story>> GetAllStoriesAsync(); 
+    public Task<Story?>? GetStoryByIdAsync(int id);
+    public Task<int> StoreStoryAsync(Story model);
 }
