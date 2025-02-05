@@ -24,8 +24,6 @@ public class SeedData
             AppUser contributor2 = new AppUser { UserName = "Elithan" };
             // user3
             AppUser contributor3 = new AppUser { UserName = "JamesM" };
-
-            
             isSuccess = userManager.CreateAsync(contributor1, SECRET_PASSWORD).Result.Succeeded;
             if (isSuccess)
             {
