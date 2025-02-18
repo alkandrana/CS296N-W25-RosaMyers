@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace OnTolkien.Models;
+namespace OnTolkien.Models.ViewModels;
 
 public class UserVM
 {

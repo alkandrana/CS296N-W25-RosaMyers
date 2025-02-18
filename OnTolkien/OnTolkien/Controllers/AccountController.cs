@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnTolkien.Models;
+using OnTolkien.Models.ViewModels;
 
 namespace OnTolkien.Controllers;
 

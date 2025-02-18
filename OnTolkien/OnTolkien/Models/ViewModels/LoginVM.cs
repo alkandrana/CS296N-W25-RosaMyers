@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace OnTolkien.Models;
+namespace OnTolkien.Models.ViewModels;
 
 public class LoginVM
 {
