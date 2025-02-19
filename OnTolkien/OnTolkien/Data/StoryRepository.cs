@@ -13,7 +13,9 @@ public class StoryRepository : IStoryRepository
 
     public async Task<List<Story>> GetAllStoriesAsync()
     {
-        var stories = _context.Stories.Include(story => story.Contributor)
+        var stories = _context.Stories
+            .Include(story => story.Contributor)
+            .Include(story => story.Topic)
             .Include(story => story.Comments)
             .ThenInclude(c => c.Commenter).ToListAsync();
 
@@ -24,6 +26,7 @@ public class StoryRepository : IStoryRepository
     {
         var story = await _context.Stories 
             .Include(story => story.Contributor)
+            .Include(story => story.Topic)
             .Include(story => story.Comments)
             .ThenInclude(c => c.Commenter)
             .SingleOrDefaultAsync(story => story.StoryId == id);
@@ -36,6 +39,10 @@ public class StoryRepository : IStoryRepository
         await _context.Stories.AddAsync(model);
         return await _context.SaveChangesAsync();
     }
-    
-    
+
+    public async Task<int> UpdateStoryAsync(Story model)
+    {
+        _context.Stories.Update(model);
+        return await _context.SaveChangesAsync();
+    }
 }

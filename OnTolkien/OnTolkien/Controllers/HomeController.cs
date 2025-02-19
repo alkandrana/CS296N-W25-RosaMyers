@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnTolkien.Data;
+using OnTolkien.Models.ViewModels;
 
 namespace OnTolkien.Controllers
 {
@@ -74,10 +75,25 @@ namespace OnTolkien.Controllers
                 return View();
             }
         }
-
-        public IActionResult Comment()
+        [Authorize]
+        public IActionResult Comment(int storyId)
         {
-            return View();
+            CommentVM model = new CommentVM{ StoryId = storyId };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Comment(CommentVM model)
+        {
+            Comment comment = new Comment {CommentText = model.CommentText};
+            comment.Commenter = _userManager.GetUserAsync(User).Result;
+            comment.CommentDate = DateTime.Now;
+            
+            Story story = await _repo.GetStoryByIdAsync(model.StoryId);
+            story.Comments.Add(comment);
+            await _repo.UpdateStoryAsync(story);
+            
+            return RedirectToAction("Filter", new { storyId = model.StoryId, contributor = story.Contributor });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

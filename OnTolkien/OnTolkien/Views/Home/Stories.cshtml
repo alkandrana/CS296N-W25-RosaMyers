@@ -33,7 +33,7 @@
 							<div class="row">
 								<p class="col-3 divider">
 									Title: @s.Title <br/>
-									Subject: @s.Topic <br/>
+									Topic: @s.Topic.TopicName <br/>
 									Contributor: @s.Contributor.UserName <br/>
 									Year of the Event: @s.StoryYear <br/>
 									The Story: @s.StoryText <br/>
@@ -49,7 +49,7 @@
 											Commenter: @c.Commenter.UserName
 										</p>
 									}
-									<a asp-action="Comment" asp-controller="Home" class="col-3">Join the conversation!</a>
+									<a asp-action="Comment" asp-route-storyId="@s.StoryId" class="col-3">Join the conversation!</a>
 								}
 								else
 								{
