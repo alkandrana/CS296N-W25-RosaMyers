@@ -13,21 +13,27 @@
 <form method="post" class="container">
     <div class="row p-2">
         <label for="title" class="col-form-label col-md-2 mb-3">Title</label>
-        <div class="col-md-8">
+        <div class="col-md-4">
             <input id="title" name="Title" class="form-control bg-secondary-subtle" />
         </div>
     </div>
 
     <div class="row p-2">
-        <label for="topic" class="col-form-label col-md-2 mb-3">Topic</label>
-        <div class="col-md-8">
-            <input id="topic" name="Topic" class="form-control bg-dark-subtle" />
+        <label asp-for="Topic" class="col-form-label col-md-2 mb-3">Topic</label>
+        <div class="col-md-2">
+            <select asp-for="Topic" class="form-select">
+                <option value="">select a topic</option>
+                @foreach (Topic t in ViewBag.Topics)
+                {
+                    <option value="@t.TopicId">@t.TopicName</option>
+                }
+            </select>
         </div>
     </div>
 
     <div class="row p-2">
         <label for="year" class="col-form-label col-md-2 mb-3">Year of the Event</label>
-        <div class="col-md-8">
+        <div class="col-md-4">
             <input id="year" name="StoryYear" class="form-control bg-secondary-subtle" />
         </div>
     </div>

@@ -22,6 +22,12 @@ public class StoryRepository : IStoryRepository
         return await stories;
     }
 
+    public async Task<List<Topic>> GetAllTopicsAsync()
+    {
+        var topics = _context.Topics.ToListAsync();
+        return await topics;
+    }
+
     public async Task<Story?>? GetStoryByIdAsync(int id)
     {
         var story = await _context.Stories 
@@ -45,4 +51,6 @@ public class StoryRepository : IStoryRepository
         _context.Stories.Update(model);
         return await _context.SaveChangesAsync();
     }
+    
+    
 }

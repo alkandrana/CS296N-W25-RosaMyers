@@ -51,13 +51,13 @@ namespace OnTolkien.Controllers
             return View("Stories", stories);
         }
         [Authorize]
-        public IActionResult Story() 
+        public async Task<IActionResult> Story() 
         {
+            ViewBag.Topics = await _repo.GetAllTopicsAsync();
             return View();
         }
         
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Story(Story model)
         {
             if (model.Contributor == null)  // otherwise, unit tests will fail
