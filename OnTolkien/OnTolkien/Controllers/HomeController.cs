@@ -75,6 +75,18 @@ namespace OnTolkien.Controllers
                 return View();
             }
         }
+
+        public IActionResult DeleteStoryPost(int storyId)
+        {
+            Story story = _repo.GetStoryByIdAsync(storyId).Result;
+            if (_repo.DeleteStory(story) > 0)
+            {
+                TempData["Success"] = "Story successfully deleted.";
+                return RedirectToAction("Stories");    
+            }
+            TempData["ErrorMessage"] = "There was an error deleting the story.";
+            return RedirectToAction("Stories");
+        }
         [Authorize]
         public IActionResult Comment(int storyId)
         {

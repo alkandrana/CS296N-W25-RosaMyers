@@ -9,6 +9,5 @@ public interface IStoryRepository
     public Task<int> StoreStoryAsync(Story model);
 
     public Task<int> UpdateStoryAsync(Story model);
-    
-    
+    public int DeleteStory(Story story);
 }

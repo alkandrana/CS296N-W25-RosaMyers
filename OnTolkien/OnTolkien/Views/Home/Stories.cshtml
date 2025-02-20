@@ -11,8 +11,19 @@
 
 
 <div>
+	@if (TempData["Success"] != null)
+	{	
+		<p class="text-success">@TempData["Success"]</p>
+	}
+	else
+	{
+		<p class="text-danger">@TempData["ErrorMessage"]</p>
+	}
+	
 	<h2>The List of Stories</h2>
 	<h4>Filter the list of stories:</h4>
+
+
 	<form method="post" action="/Home/Filter" class="p-5">
 		<label name="name">Contributor</label>
 		<input name="name" type="text" class="bg-secondary"/>
@@ -24,46 +35,48 @@
 	@if (Model.Count != 0)
 	{
 		<div class="container">
-			
-				@foreach (Story s in Model)
+
+			@foreach (Story s in Model)
+			{
+
+				@if (s.Contributor != null)
 				{
-					
-						@if (s.Contributor != null)
+					<div class="row">
+						<p class="col-3 divider">
+							Title: @s.Title <br/>
+							Topic: @s.Topic.TopicName <br/>
+							Contributor: @s.Contributor.UserName <br/>
+							Year of the Event: @s.StoryYear <br/>
+							The Story: @s.StoryText <br/>
+							Submission Date: @s.EntryDate.ToString("d", new CultureInfo("en-us"))<br/>
+							<a asp-action="DeleteStoryPost" asp-route-storyId="@s.StoryId">Delete Story</a>
+						</p>
+						@if (s.Comments.Count > 0)
 						{
-							<div class="row">
-								<p class="col-3 divider">
-									Title: @s.Title <br/>
-									Topic: @s.Topic.TopicName <br/>
-									Contributor: @s.Contributor.UserName <br/>
-									Year of the Event: @s.StoryYear <br/>
-									The Story: @s.StoryText <br/>
-									Submission Date: @s.EntryDate.ToString("d", new CultureInfo("en-us"))
+							@foreach (Comment c in s.Comments)
+							{
+								<p class="col-3">
+									Comment: @c.CommentText <br/>
+									Date: @c.CommentDate <br/>
+									Commenter: @c.Commenter.UserName
 								</p>
-								@if(s.Comments.Count > 0)
-								{
-									@foreach (Comment c in s.Comments)
-									{
-										<p class="col-3">
-											Comment: @c.CommentText <br/>
-											Date: @c.CommentDate <br/>
-											Commenter: @c.Commenter.UserName
-										</p>
-									}
-									<div class="col-3">
-										<a asp-action="Comment" asp-route-storyId="@s.StoryId" class="btn btn-primary">Join the conversation!</a>
-									</div>
-								}
-								else
-								{
-									<div class="col-3">
-										<a asp-action="Comment" asp-route-storyId="@s.StoryId" class="btn btn-primary">Be the first to leave a comment!</a>
-									</div>
-								}
+							}
+
+							<div class="col-3">
+								<a asp-action="Comment" asp-route-storyId="@s.StoryId" class="btn btn-primary">Join the conversation!</a>
 							</div>
 						}
-					
+						else
+						{
+							<div class="col-3">
+								<a asp-action="Comment" asp-route-storyId="@s.StoryId" class="btn btn-primary">Be the first to leave a comment!</a>
+							</div>
+						}
+					</div>
 				}
-			
+
+			}
+
 		</div>
 	}
 	else

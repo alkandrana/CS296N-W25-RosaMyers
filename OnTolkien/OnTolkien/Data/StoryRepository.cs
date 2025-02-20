@@ -51,6 +51,10 @@ public class StoryRepository : IStoryRepository
         _context.Stories.Update(model);
         return await _context.SaveChangesAsync();
     }
-    
-    
+
+    public int DeleteStory(Story story)
+    {
+        _context.Stories.Remove(story);
+        return _context.SaveChanges();
+    }
 }
