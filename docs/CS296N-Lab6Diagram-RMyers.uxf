@@ -1,0 +1,29 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes
+</help_text><element><id>UMLClass</id><coordinates><x>350</x><y>140</y><w>140</w><h>120</h></coordinates><panel_attributes>Story
+--
+StoryId: int
+Title: string
+StoryYear: int
+StoryText: string
+EntryDate: DateTime</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>340</x><y>400</y><w>160</w><h>90</h></coordinates><panel_attributes>Comment
+--
+CommentId: int
+CommentText: string
+CommentDate: DateTime</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>650</x><y>190</y><w>150</w><h>60</h></coordinates><panel_attributes>AppUser
+--
+SignUpDate: DateTime
+RoleNames: IList&lt;string&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>170</y><w>160</w><h>90</h></coordinates><panel_attributes>Topic
+--
+TopicId: string
+TopicName: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>650</x><y>70</y><w>150</w><h>60</h></coordinates><panel_attributes>IdentityUser
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>120</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>190</y><w>190</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..*
+m2=1..1</panel_attributes><additional_attributes>10;10;170;30</additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>190</y><w>150</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..*
+m2=1..1
+
+</panel_attributes><additional_attributes>130;10;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>410</x><y>250</y><w>50</w><h>170</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1..1
+m2=0..*</panel_attributes><additional_attributes>10;10;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>260</x><y>50</y><w>330</w><h>520</h></coordinates><panel_attributes>lt=.()
+Aggregate: Root Is Story</panel_attributes><additional_attributes>160;500;10;450;40;20;160;20;270;10;310;460;160;500</additional_attributes></element></diagram>
