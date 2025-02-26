@@ -1,15 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>This is going to be my awesome site about author J.R.R. Tolkien, the father of epic fantasy! </p>
+<div class="row">
+    <div class="col-1">
+        <h2>Menu</h2>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="Home/History" class="btn btn-dark">History</a></li>
+            <li class="list-group-item"><a href="Home/Stories" class="btn btn-warning">Stories</a></li>
+            <li class="list-group-item"><a href="Home/Privacy" class="btn btn-secondary">Privacy</a></li>
+        </ul>
+    </div>
+    <div class="text-center col">
+        <h1 class="display-4">Welcome</h1>
+        <p>This is going to be my awesome site about author J.R.R. Tolkien, the father of epic fantasy! </p>
+        <img src="pics/tobias-stonjeck-U9Uhtm7spmQ-unsplash.jpg" alt="image of hobbit village" class="pics m-5"/>
+        <img src="pics/hobbit.jpg" alt="image of the cover of The Hobbit by Tolkien" class="pics m-5"/>
+        <img src="pics/ilia-bronskiy-E8tbFuM3fQA-unsplash.jpg" alt="image of Lautbrunnen, Switzerland, inspiration for Rivendell" class="pics m-5"/>
+    </div>
 </div>
 
-<h2>Menu</h2>
-	<ul class="list-group list-group-horizontal">
-		<li class="list-group-item bg-success"><a href="Home/History" class="link text-danger">History</a></li>
-		<li class="list-group-item"><a href="Home/Stories" class="link">Stories</a></li>
-		<li class="list-group-item"><a href="Home/Privacy" class="link">Privacy</a></li>
-	</ul>
