@@ -38,6 +38,8 @@ namespace OnTolkien.Controllers
         public async Task<IActionResult> Stories()
         {
              var stories = await _repo.GetAllStoriesAsync();
+             AppUser currentUser = await _userManager.GetUserAsync(User);
+             ViewBag.CurrentUser = currentUser;
              return View(stories);
         }
 
