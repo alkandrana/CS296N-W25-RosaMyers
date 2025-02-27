@@ -217,6 +217,35 @@ namespace OnTolkien.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("OnTolkien.Models.Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CommentText")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<string>("CommenterId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("StoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CommentId");
+
+                    b.HasIndex("CommenterId");
+
+                    b.HasIndex("StoryId");
+
+                    b.ToTable("Comment");
+                });
+
             modelBuilder.Entity("OnTolkien.Models.Story", b =>
                 {
                     b.Property<int>("StoryId")
@@ -240,15 +269,32 @@ namespace OnTolkien.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Topic")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<string>("TopicId")
+                        .HasColumnType("varchar(1)");
 
                     b.HasKey("StoryId");
 
                     b.HasIndex("ContributorId");
 
+                    b.HasIndex("TopicId");
+
                     b.ToTable("Stories");
+                });
+
+            modelBuilder.Entity("OnTolkien.Models.Topic", b =>
+                {
+                    b.Property<string>("TopicId")
+                        .HasMaxLength(1)
+                        .HasColumnType("varchar(1)");
+
+                    b.Property<string>("TopicName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("TopicId");
+
+                    b.ToTable("Topics");
                 });
 
             modelBuilder.Entity("OnTolkien.Models.AppUser", b =>
@@ -312,13 +358,39 @@ namespace OnTolkien.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("OnTolkien.Models.Comment", b =>
+                {
+                    b.HasOne("OnTolkien.Models.AppUser", "Commenter")
+                        .WithMany()
+                        .HasForeignKey("CommenterId");
+
+                    b.HasOne("OnTolkien.Models.Story", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("StoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Commenter");
+                });
+
             modelBuilder.Entity("OnTolkien.Models.Story", b =>
                 {
                     b.HasOne("OnTolkien.Models.AppUser", "Contributor")
                         .WithMany()
                         .HasForeignKey("ContributorId");
 
+                    b.HasOne("OnTolkien.Models.Topic", "Topic")
+                        .WithMany()
+                        .HasForeignKey("TopicId");
+
                     b.Navigation("Contributor");
+
+                    b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("OnTolkien.Models.Story", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

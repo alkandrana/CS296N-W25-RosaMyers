@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - On Tolkien</title>
     <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/OnTolkien.styles.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/OnTolkien.styles.css" asp-append-version="true" />*@
 </head>
 <body>
 <header>
@@ -70,14 +70,23 @@
     </nav>
 </header>
 <div class="container">
-    <main role="main" class="pb-3">
+    <main role="main" class="pb-3 text-light">
         @RenderBody()
     </main>
 </div>
 
-<footer class="border-top footer text-muted">
-    <div class="container">
+<footer class="border-top footer bg-dark text-light">
+    <div class="container p-3">
         &copy; 2024 - On Tolkien - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        @if ((string)ViewData["Title"] == "Home Page")
+        {
+            <p>
+                Photo credit, from left to right: &nbsp;|&nbsp;
+                Photo by <a href="https://unsplash.com/@@tobistj?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Tobias Stonjeck</a> on <a href="https://unsplash.com/photos/garden-during-daytime-U9Uhtm7spmQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>&nbsp;|&nbsp;
+                Photo by Rosa Lee Myers&nbsp;|&nbsp;
+                Photo by <a href="https://unsplash.com/@@idbronskiy?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Ilia Bronskiy</a> on <a href="https://unsplash.com/photos/a-church-in-the-middle-of-a-valley-with-mountains-in-the-background-E8tbFuM3fQA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>&nbsp;|&nbsp;
+            </p>
+        }
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
