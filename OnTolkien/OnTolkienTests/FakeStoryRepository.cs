@@ -34,6 +34,11 @@ public class FakeStoryRepository : IStoryRepository
         throw new NotImplementedException();
     }
 
+    public Task<int> DeleteStoryAsync(Story story)
+    {
+        throw new NotImplementedException();
+    }
+
     public int DeleteStory(Story story)
     {
         throw new NotImplementedException();

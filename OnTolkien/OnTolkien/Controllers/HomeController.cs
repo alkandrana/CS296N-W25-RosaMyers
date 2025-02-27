@@ -76,17 +76,30 @@ namespace OnTolkien.Controllers
             }
         }
 
-        public IActionResult DeleteStoryPost(int storyId)
+        public async Task<IActionResult> DeleteStoryPost(int storyId)
         {
-            Story story = _repo.GetStoryByIdAsync(storyId).Result;
-            if (_repo.DeleteStory(story) > 0)
+            Story story = await _repo.GetStoryByIdAsync(storyId);
+            AppUser currentUser = await _userManager?.GetUserAsync(User);
+            if (currentUser == story.Contributor) // check that user deleting the story is the author of the story
             {
-                TempData["Success"] = "Story successfully deleted.";
-                return RedirectToAction("Stories");    
+                if (await _repo.DeleteStoryAsync(story) > 0)
+                {
+                    TempData["Success"] = "Story successfully deleted.";
+                    return RedirectToAction("Stories");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "There was an error deleting the story. Please try again.";
+                    return RedirectToAction("Stories");
+                }
             }
-            TempData["ErrorMessage"] = "There was an error deleting the story.";
-            return RedirectToAction("Stories");
+            else
+            {
+                TempData["ErrorMessage"] = "There was an error deleting the story. Make sure that you have the proper authorization.";
+                return RedirectToAction("Stories");
+            }
         }
+        
         [Authorize]
         public IActionResult Comment(int storyId)
         {

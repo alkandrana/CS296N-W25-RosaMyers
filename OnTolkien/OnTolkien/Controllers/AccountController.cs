@@ -30,18 +30,26 @@ public class AccountController : Controller
         if (ModelState.IsValid)
         {
             var user = new AppUser { UserName = model.Username, SignUpDate = DateTime.Now};
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
+            // check that username does not already exist
+            if (await _userManager.FindByNameAsync(model.Username) == null)
             {
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Home");
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
             }
             else
             {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                ModelState.AddModelError("", "That username is taken. Please choose another one.");
             }
         }
         return View("Registration", model);

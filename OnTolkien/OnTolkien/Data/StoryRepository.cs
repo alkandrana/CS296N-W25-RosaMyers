@@ -52,9 +52,9 @@ public class StoryRepository : IStoryRepository
         return await _context.SaveChangesAsync();
     }
 
-    public int DeleteStory(Story story)
+    public async Task<int> DeleteStoryAsync(Story story)
     {
         _context.Stories.Remove(story);
-        return _context.SaveChanges();
+        return await _context.SaveChangesAsync();
     }
 }
