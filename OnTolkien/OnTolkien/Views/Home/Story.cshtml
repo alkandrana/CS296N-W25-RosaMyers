@@ -19,9 +19,9 @@
     </div>
 
     <div class="row p-2">
-        <label asp-for="Topic" class="col-form-label col-md-2 mb-3">Topic</label>
+        <label asp-for="TopicId" class="col-form-label col-md-2 mb-3">Topic</label>
         <div class="col-md-2">
-            <select asp-for="Topic" class="form-select">
+            <select asp-for="TopicId" class="form-select">
                 <option value="">select a topic</option>
                 @foreach (Topic t in ViewBag.Topics)
                 {

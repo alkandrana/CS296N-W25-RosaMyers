@@ -6,7 +6,7 @@ namespace OnTolkien.Models
     {
         public int StoryId { get; set; }
         public string Title { get; set; }
-
+        [StringLength(1)] public string TopicId { get; set; } = "G";
         public Topic? Topic { get; set; }
 
         public int StoryYear { get; set; }
