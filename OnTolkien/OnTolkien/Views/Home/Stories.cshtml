@@ -57,7 +57,7 @@
 							@if (s.Contributor == ViewBag.currentUser) // display delete button only if logged-in user is the author of the story
 							{
 								<a asp-action="DeleteStoryPost" asp-route-storyId="@s.StoryId" class="link-danger">Delete Story</a>	
-							}q
+							}
 							
 						</p>
 						@if (s.Comments.Count > 0)

@@ -62,20 +62,29 @@ namespace OnTolkien.Controllers
         [HttpPost]
         public async Task<IActionResult> Story(Story model)
         {
-            if (model.Contributor == null)  // otherwise, unit tests will fail
+            
+            ViewBag.Topics = await _repo.GetAllTopicsAsync();
+            if (ModelState.IsValid)
             {
-                model.Contributor =  _userManager?.GetUserAsync(User).Result;
+                if (model.Contributor == null)  // otherwise, unit tests will fail
+                {
+                    model.Contributor =  _userManager?.GetUserAsync(User).Result;
+                }
+                
+                model.EntryDate = DateTime.Now;
+                
+                if (await _repo.StoreStoryAsync(model) > 0)
+                {
+                    return RedirectToAction("Stories", new { storyId = model.StoryId });
+                }
+                ModelState.AddModelError("", "There was an error saving the story.");
             }
-            model.EntryDate = DateTime.Now;
-            if (await _repo.StoreStoryAsync(model) > 0)
-            {
-                return RedirectToAction("Stories", new { storyId = model.StoryId });
-            }
+            
             else
             {
-                ViewBag.ErrorMessage = "There was an error saving the story.";
-                return View();
+                ModelState.AddModelError("", "There were data entry errors. Please check the form.");
             }
+            return View(model);
         }
 
         public async Task<IActionResult> DeleteStoryPost(int storyId)
@@ -110,15 +119,25 @@ namespace OnTolkien.Controllers
         [HttpPost]
         public async Task<IActionResult> Comment(CommentVM model)
         {
-            Comment comment = new Comment {CommentText = model.CommentText};
-            comment.Commenter = _userManager.GetUserAsync(User).Result;
-            comment.CommentDate = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                Comment comment = new Comment {CommentText = model.CommentText};
+                comment.Commenter = _userManager.GetUserAsync(User).Result;
+                comment.CommentDate = DateTime.Now;
             
-            Story story = await _repo.GetStoryByIdAsync(model.StoryId);
-            story.Comments.Add(comment);
-            await _repo.UpdateStoryAsync(story);
+                Story story = await _repo.GetStoryByIdAsync(model.StoryId);
+                story.Comments.Add(comment);
+                await _repo.UpdateStoryAsync(story);
+                return RedirectToAction("Filter", new { storyId = model.StoryId, contributor = story.Contributor });
+            }
+            else
+            {
+                ModelState.AddModelError("", "There were data entry errors. Please check the form.");
+                return View(model);
+            }
             
-            return RedirectToAction("Filter", new { storyId = model.StoryId, contributor = story.Contributor });
+            
+            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
