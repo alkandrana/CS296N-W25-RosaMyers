@@ -86,20 +86,18 @@ namespace OnTolkien.Controllers
             {
                 if (await _repo.DeleteStoryAsync(story) > 0)
                 {
-                    TempData["Success"] = "Story successfully deleted.";
-                    return RedirectToAction("Stories");
+                    TempData["success"] = "Story successfully deleted.";
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "There was an error deleting the story. Please try again.";
-                    return RedirectToAction("Stories");
+                    TempData["error"] = "There was an error deleting the story. Please try again.";
                 }
             }
             else
             {
-                TempData["ErrorMessage"] = "There was an error deleting the story. Make sure that you have the proper authorization.";
-                return RedirectToAction("Stories");
+                TempData["error"] = "There was an error deleting the story. Make sure that you have the proper authorization.";
             }
+            return RedirectToAction("Stories");
         }
         
         [Authorize]

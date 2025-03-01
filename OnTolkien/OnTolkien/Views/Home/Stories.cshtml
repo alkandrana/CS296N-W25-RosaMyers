@@ -11,13 +11,13 @@
 
 
 <div>
-	@if (TempData["Success"] != null)
+	@if (TempData["success"] != null)
 	{	
-		<p class="text-success">@TempData["Success"]</p>
+		<p class="text-success">@TempData["success"]</p>
 	}
 	else
 	{
-		<p class="text-danger">@TempData["ErrorMessage"]</p>
+		<p class="text-danger">@TempData["error"]</p>
 	}
 	<div class="row">
 		<div class="col">
