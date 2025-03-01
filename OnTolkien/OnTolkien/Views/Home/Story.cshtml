@@ -8,13 +8,16 @@
     <h1 class="display-4">Story Forum</h1>
 </div>
 
-<span class="text-danger">@ViewBag.ErrorMessage</span>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 <form method="post" class="container">
     <div class="row p-2">
-        <label for="title" class="col-form-label col-md-2 mb-3">Title</label>
+        <label asp-for="Title" class="col-form-label col-md-2 mb-3">Title</label>
         <div class="col-md-4">
-            <input id="title" name="Title" class="form-control bg-secondary-subtle" />
+            <input id="title" asp-for="Title" class="form-control bg-secondary-subtle" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
     </div>
 
@@ -29,19 +32,28 @@
                 }
             </select>
         </div>
+        <div class="col">
+            <span asp-validation-for="TopicId" class="text-danger"></span>
+        </div>
     </div>
 
     <div class="row p-2">
         <label for="year" class="col-form-label col-md-2 mb-3">Year of the Event</label>
         <div class="col-md-4">
-            <input id="year" name="StoryYear" class="form-control bg-secondary-subtle" />
+            <input id="year" asp-for="StoryYear" class="form-control bg-secondary-subtle" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="StoryYear" class="text-danger"></span>
         </div>
     </div>
 
     <div class="row p-2">
-        <label for="story" class="col-form-label col-md-2 mb-3">Enter your story here</label>
+        <label asp-for="StoryText" class="col-form-label col-md-2 mb-3">Enter your story here</label>
         <div class="col-md-8">
-            <textarea id="story" name="StoryText" class="form-control bg-info-subtle"></textarea>
+            <textarea id="story" asp-for="StoryText" class="form-control bg-info-subtle"></textarea>
+        </div>
+        <div class="col">
+            <span asp-validation-for="StoryText" class="text-danger"></span>
         </div>
     </div>
 

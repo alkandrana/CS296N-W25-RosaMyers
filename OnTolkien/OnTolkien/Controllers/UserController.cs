@@ -103,7 +103,6 @@ public class UserController : Controller
     {
         AppUser user = await _userManager.FindByIdAsync(id);
         var result = await _userManager.RemoveFromRoleAsync(user, "Admin");
-        // TODO: resolve stub
         if (result.Succeeded)
         {
             ViewBag.Message = user.UserName + " has been successfully removed from the admin role.";
