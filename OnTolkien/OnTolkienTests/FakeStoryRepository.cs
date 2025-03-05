@@ -5,10 +5,11 @@ namespace OnTolkienTests;
 public class FakeStoryRepository : IStoryRepository
 {
     private List<Story> _stories = new List<Story>();
+    private List<Topic> _topics = new List<Topic>();
 
-    public Task<List<Topic>> GetAllTopicsAsync()
+    public async Task<List<Topic>> GetAllTopicsAsync()
     {
-        throw new NotImplementedException();
+        return _topics;
     }
 
     public async Task<Story?>? GetStoryByIdAsync(int id)
